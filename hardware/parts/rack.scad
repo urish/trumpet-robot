@@ -44,6 +44,16 @@ module Rack(
     }
 }
 
+// Left
+rotate([90, 0, 0])
 Rack();
 
+// Middle
+translate([-15, -25, 0])
 Rack(middle=true);
+
+// Right
+translate([20, 25, 0])
+mirror([1, 0, 0])
+rotate([90, 0, 0])
+Rack();
