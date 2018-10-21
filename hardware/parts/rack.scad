@@ -19,6 +19,7 @@ module Rack(
     translate([-5, 0, 0])
     cube([5, width, thickness]);
 
+    // Rack body
     cube([rackLength, width - toothHeight, thickness]);
 
     for (toothIdx = [1 : numTeeth]) {
@@ -32,6 +33,7 @@ module Rack(
         ]);
     }
 
+    // Finger
     translate([rackLength - fingerWidth, middle ? width : 0, 0])
     rotate([middle ? 90 : 0, 0, 0])
     difference() {
