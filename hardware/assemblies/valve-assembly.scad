@@ -2,35 +2,30 @@ use <../vitamins/valves.scad>
 use <../parts/fingertip.scad>
 use <../parts/rack.scad>
 use <./servo-assembly.scad>
+use <./finger-assembly.scad>
 
 module ValveAssembly() {
     TrumpetValves(pressed=$t);
-    rackPosition = [22, -15, -5];
 
-    translate([-valveDistance() * 2, 55, -10]) {
+    translate([-valveDistance() * 2 + 6, 55, -10]) {
         ServoAssembly();
 
-        translate(rackPosition)
-        rotate([90, -90, 0])
-        Rack();
+        FingerAssembly();
     }
 
-    translate([-valveDistance()/2, 70, -10])  {
-        ServoAssembly(hasSpacer=true);
+    translate([valveDistance() / 2 + 6.5, 58, -10])  {
+        rotate([0, 0, -90])
+        ServoAssembly(middle=true);
 
-        translate(rackPosition)
-        rotate([90, -90, 0])
-        Rack(fingerLength=64);
+        translate([-37.5, -3, 0])
+        FingerAssembly(middle=true);
     }
 
-    translate([valveDistance() * 2, 55, -10])
-    rotate([0, 180, 0]) {
-        ServoAssembly(gearDirection=1);
+    translate([valveDistance() * 2 - 6, 55, -10])
+    mirror([1, 0, 0]) {
+        ServoAssembly();
 
-        translate([rackPosition[0], rackPosition[1], -rackPosition[2]])
-        mirror([0, 0, 1])
-        rotate([90, -90, 0])
-        Rack();
+        FingerAssembly();
     }
 }
 
