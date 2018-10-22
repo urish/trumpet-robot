@@ -17,7 +17,7 @@ module SingleValve(pressed = 0) {
     translate([0, 0, -4.75])
     cylinder(h=4, r=21.72/2);
 
-    cylinder(h=20.75 - (valvePressAmount() * pressed), r=5.56 / 2.0);
+    cylinder(h=20.75 - (valvePressAmount() * pressed) - epsilon, r=5.56 / 2.0);
 
     color("#e6e6fa")
     translate([0, 0, 20.75-5.3 - (valvePressAmount() * pressed)])
