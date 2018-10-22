@@ -1,5 +1,4 @@
 include <MCAD/units.scad>
-use <../lib/rack.scad>
 
 module Rack(
     numTeeth = 9,
