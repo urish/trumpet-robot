@@ -11,7 +11,7 @@ module ServoAssembly(middle=false) {
     color("fuchsia")
     translate([0, -16, 5])
     rotate([90, -90, 0]) 
-    rotate([0, 0, -$t * 60])
+    rotate([0, 0, -$t * 50 + 13])
     ServoGear();
 
     color("cyan")
