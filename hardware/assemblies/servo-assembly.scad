@@ -3,10 +3,7 @@ use <../parts/servo-gear.scad>
 use <../parts/servo-mount.scad>
 use <../parts/servo-trumpet-attachment.scad>
 
-module ServoAssembly(
-    middle=false, 
-    mirror=false,
-) {
+module ServoAssembly(middle=false) {
     translate([0, -2, 0])
     rotate([90, -90, 0])
     MicroServo();
@@ -14,7 +11,7 @@ module ServoAssembly(
     color("fuchsia")
     translate([0, -16, 5])
     rotate([90, -90, 0]) 
-    rotate([0, 0, (mirror ? 1 : -1) * $t * 60])
+    rotate([0, 0, -$t * 60])
     ServoGear();
 
     color("cyan")
