@@ -52,4 +52,14 @@ module ServoMount(middle=false) {
     }
 }
 
+// Left
+translate([25, 0, 0])
+ServoMount();
+
+// Middle
+ServoMount(middle=true);
+
+// Right
+translate([-5, 0, 0])
+mirror([1, 0, 0])
 ServoMount();
