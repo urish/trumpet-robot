@@ -20,7 +20,7 @@ module ServoAssembly(middle=false) {
     ServoMount(middle);
 
     color("orange") 
-    if(middle) {   
+    if(middle) {
         translate([34, -29, 0])
         rotate([-90, 90, 0])
         ServoTrumpetAttachment();
@@ -30,6 +30,5 @@ module ServoAssembly(middle=false) {
         ServoTrumpetAttachment();
     }    
 }
-
 
 ServoAssembly();
