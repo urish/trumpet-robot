@@ -15,3 +15,5 @@ module FingerAssembly(middle=false) {
         Fingertip();
     }
 }
+
+FingerAssembly();
