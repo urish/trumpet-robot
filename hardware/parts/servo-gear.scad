@@ -17,7 +17,7 @@ module ServoGear(thickness=6) {
             involute_facets=16
         );
         
-        circle(r=5/2, $fn=12);
+        circle(r=4.7/2, $fn=12);
     }
     
     linear_extrude(3)
