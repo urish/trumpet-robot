@@ -28,4 +28,4 @@ module ServoTrumpetAttachment() {
 
 translate([0, 0, 9])
 rotate([90, 0, 0])
-TrumpetServoAttachment();
+ServoTrumpetAttachment();
