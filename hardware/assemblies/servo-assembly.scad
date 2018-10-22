@@ -43,3 +43,6 @@ module ServoAssembly(
         ServoTrumpetAttachment();
     }    
 }
+
+
+ServoAssembly();
