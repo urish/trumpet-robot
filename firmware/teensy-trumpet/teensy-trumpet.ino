@@ -52,7 +52,8 @@ void setup() {
   Serial.begin(115200);
 #endif
   Raspberry.begin(115200);
-  pinMode(LED, OUTPUT);     
+  pinMode(LED, OUTPUT);   
+  Raspberry.println("INIT");
 }
 
 inline bool validServo(int idx) {
@@ -212,6 +213,10 @@ void processCommand(String cmd) {
 
   case 'D':
     setFingersDownCommand(args);
+    break;
+
+  case 'F':
+    fingersCommand(args);
     break;
 
   case 'L':

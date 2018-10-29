@@ -9,11 +9,15 @@ const port = process.env.TRUMPET_PORT || 3000;
 const app = express();
 const http = new Server(app);
 const io = socket(http);
+const servoSetupCommands = ['U0,100', 'D0,170', 'U1,150', 'D1,80', 'U2,155', 'D2,90'];
 
 app.use(express.static('web'));
 
 io.on('connection', socket => {
   console.log('a user connected :-)');
+  socket.on('command', msg => {
+    serialPort.write(msg + '\n');
+  });
 });
 
 http.listen(port, () => {
@@ -23,5 +27,13 @@ http.listen(port, () => {
 const serialPort = new SerialPort('/dev/serial0', { baudRate: 115200 });
 const parser = serialPort.pipe(new Readline({ delimiter: '\r\n' }));
 parser.on('data', msg => {
-  io.emit('midi', msg);
+  if (msg === 'INIT') {
+    console.log('Teensy connected!');
+    for (const cmd of servoSetupCommands) {
+      serialPort.write(cmd + '\n');
+    }
+    serialPort.write('L2\n');
+  } else {
+    io.emit('midi', msg);
+  }
 });
