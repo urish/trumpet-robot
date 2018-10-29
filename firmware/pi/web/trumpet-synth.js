@@ -43,16 +43,22 @@
 
   let activeNote = null;
 
-  async function noteOff() {
-    if (activeNote) {
-      activeNote.gain.exponentialRampToValueAtTime(0.00001, context.currentTime + 0.1);
+  async function noteOff(note) {
+    if (activeNote && activeNote.pitch === note) {
+      activeNote.gainNode.gain.exponentialRampToValueAtTime(0.00001, context.currentTime + 0.1);
       activeNote = null;
     }
   }
 
   async function noteOn(note, velocity) {
+    const normalizedGain = velocity / 127;
+    if (activeNote && velocity > 0 && note === activeNote.pitch) {
+      activeNote.gainNode.gain.value = normalizedGain;
+      return;
+    }
     if (activeNote) {
-      noteOff();
+      // We are a trumpet, so we only support playing one note at a time
+      noteOff(activeNote.pitch);
     }
     if (!velocity) {
       return;
@@ -60,7 +66,10 @@
 
     const noteIdx = note - 54;
     if (noteIdx >= 0 && noteIdx < notes.length) {
-      activeNote = play(notes[note - 54], velocity / 127);
+      activeNote = {
+        gainNode: play(notes[note - 54], normalizedGain),
+        pitch: note,
+      };
     }
   }
 
