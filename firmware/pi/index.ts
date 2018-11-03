@@ -3,8 +3,11 @@ import * as socket from 'socket.io';
 import { Server } from 'http';
 import * as SerialPort from 'serialport';
 import * as Readline from '@serialport/parser-readline';
+import { spawn } from 'child_process';
 
 const port = process.env.TRUMPET_PORT || 3000;
+const serialDevice = process.env.SERIAL_PORT || '/dev/serial0';
+const chromeCommand = process.env.CHROME_BINARY || 'chromium-browser';
 
 const app = express();
 const http = new Server(app);
@@ -22,9 +25,16 @@ io.on('connection', socket => {
 
 http.listen(port, () => {
   console.log(`listening on *:${port}`);
+  const child = spawn(chromeCommand, [
+    '--headless',
+    '--remote-debugging-port=9222',
+    `http://localhost:${port}/`,
+  ]);
+  child.stdout.pipe(process.stdout);
+  child.stderr.pipe(process.stderr);
 });
 
-const serialPort = new SerialPort('/dev/serial0', { baudRate: 115200 });
+const serialPort = new SerialPort(serialDevice, { baudRate: 115200 });
 const parser = serialPort.pipe(new Readline({ delimiter: '\r\n' }));
 parser.on('data', msg => {
   if (msg === 'INIT') {
