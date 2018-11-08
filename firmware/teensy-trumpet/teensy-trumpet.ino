@@ -267,7 +267,9 @@ void processMIDI() {
     if (type == usbMIDI.NoteOn && data2 > 0) {
       setFingers(noteToFingers(data1));
     }
-    if ((type == usbMIDI.NoteOn && data2 == 0) || (type == usbMIDI.NoteOff)) {
+    if ((type == usbMIDI.NoteOn && data2 == 0) 
+      || (type == usbMIDI.NoteOff)
+      || (type == usbMIDI.SystemReset)) {
       setFingers(0);
     }
   }

@@ -73,6 +73,11 @@
     }
   }
 
+  function allNotesOff() {
+    noteOn(0, 127);
+  }
+
   window.noteOn = noteOn;
   window.noteOff = noteOff;
+  window.allNotesOff = allNotesOff;
 })();
