@@ -12,7 +12,7 @@ const chromeCommand = process.env.CHROME_BINARY || 'chromium-browser';
 const app = express();
 const http = new Server(app);
 const io = socket(http);
-const servoSetupCommands = ['U0,100', 'D0,170', 'U1,150', 'D1,80', 'U2,155', 'D2,90'];
+const servoSetupCommands = ['U0,94', 'D0,150', 'U1,160', 'D1,80', 'U2,148', 'D2,70'];
 
 app.use(express.static('web'));
 
